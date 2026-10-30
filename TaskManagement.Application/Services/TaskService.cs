@@ -16,7 +16,7 @@ public class TaskService : ITaskService
         _userRepository = userRepository;
     }
 
-    public async Task<IReadOnlyList<TaskDto>> GetMyCreatedTasksAsync(string currentUserId)
+    public async Task<IReadOnlyList<TaskDto>> GetMyCreatedTasksAsync(int currentUserId)
     {
         var tasks = await _taskRepository.GetCreatedByUserAsync(currentUserId);
 
@@ -26,16 +26,27 @@ public class TaskService : ITaskService
             Title = t.Title,
             Description = t.Description,
             CreatedAt = t.CreatedAt,
-            CreatorName = t.Creator?.FullName ?? string.Empty,
-            AssignedToName = t.AssignedTo?.FullName ?? string.Empty,
+            CreatorName = t.Creator?.DisplayName ?? string.Empty,
+            AssignedToName = t.AssignedTo?.DisplayName ?? string.Empty,
             IsDeleted = t.IsDeleted
         }).ToList();
     }
 
-    public async Task<TaskEditDto?> GetForEditAsync(int id, string currentUserId)
+    public async Task<IReadOnlyList<UserOptionDto>> GetAssignableUsersAsync()
+    {
+        var users = await _userRepository.GetAllAsync();
+
+        return users.Select(u => new UserOptionDto
+        {
+            Id = u.Id,
+            FullName = string.IsNullOrWhiteSpace(u.DisplayName) ? u.Email : u.DisplayName
+        }).ToList();
+    }
+
+    public async Task<TaskEditDto?> GetForEditAsync(int id, int currentUserId)
     {
         var task = await _taskRepository.GetByIdAsync(id);
-        if (task is null || task.CreatorId != currentUserId)
+        if (task is null || task.CreatorId != currentUserId || task.IsDeleted)
         {
             return null;
         }
@@ -49,7 +60,7 @@ public class TaskService : ITaskService
         };
     }
 
-    public async Task CreateAsync(TaskCreateDto dto, string currentUserId)
+    public async Task CreateAsync(TaskCreateDto dto, int currentUserId)
     {
         var assignedUser = await _userRepository.GetByIdAsync(dto.AssignedToId);
         if (assignedUser is null)
@@ -71,7 +82,7 @@ public class TaskService : ITaskService
         await _taskRepository.SaveChangesAsync();
     }
 
-    public async Task UpdateAsync(TaskEditDto dto, string currentUserId)
+    public async Task UpdateAsync(TaskEditDto dto, int currentUserId)
     {
         var task = await _taskRepository.GetByIdAsync(dto.Id);
         if (task is null || task.CreatorId != currentUserId || task.IsDeleted)
@@ -93,7 +104,7 @@ public class TaskService : ITaskService
         await _taskRepository.SaveChangesAsync();
     }
 
-    public async Task DeleteAsync(int id, string currentUserId)
+    public async Task DeleteAsync(int id, int currentUserId)
     {
         var task = await _taskRepository.GetByIdAsync(id);
         if (task is null || task.CreatorId != currentUserId || task.IsDeleted)

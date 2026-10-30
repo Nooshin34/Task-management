@@ -8,12 +8,12 @@ public class HomeController : Controller
 {
     public IActionResult Index()
     {
-        return View();
-    }
+        if (User.Identity?.IsAuthenticated == true)
+        {
+            return RedirectToAction("Index", "Tasks");
+        }
 
-    public IActionResult Privacy()
-    {
-        return View();
+        return RedirectToAction("Login", "Account");
     }
 
     [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

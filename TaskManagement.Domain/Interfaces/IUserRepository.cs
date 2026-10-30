@@ -4,6 +4,9 @@ namespace TaskManagement.Domain.Interfaces;
 
 public interface IUserRepository
 {
-    Task<IReadOnlyList<ApplicationUser>> GetAllAsync();
-    Task<ApplicationUser?> GetByIdAsync(string id);
+    Task<IReadOnlyList<User>> GetAllAsync();
+    Task<User?> GetByIdAsync(int id);
+    Task<User?> GetByEmailAsync(string email);
+    Task AddAsync(User user);
+    Task SaveChangesAsync();
 }

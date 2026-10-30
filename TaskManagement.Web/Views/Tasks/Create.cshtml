@@ -1,0 +1,40 @@
+@model TaskCreateDto
+@{
+    ViewData["Title"] = "تسک جدید";
+}
+
+<div class="row justify-content-center">
+    <div class="col-md-7">
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h2 class="card-title mb-4">تعریف تسک جدید</h2>
+                <form asp-action="Create" method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                    <div class="mb-3">
+                        <label asp-for="Title" class="form-label"></label>
+                        <input asp-for="Title" class="form-control" />
+                        <span asp-validation-for="Title" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="Description" class="form-label"></label>
+                        <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+                        <span asp-validation-for="Description" class="text-danger"></span>
+                    </div>
+                    <div class="mb-3">
+                        <label asp-for="AssignedToId" class="form-label"></label>
+                        <select asp-for="AssignedToId" asp-items="ViewBag.Users" class="form-select">
+                            <option value="">انتخاب کاربر</option>
+                        </select>
+                        <span asp-validation-for="AssignedToId" class="text-danger"></span>
+                    </div>
+                    <button type="submit" class="btn btn-primary">ذخیره</button>
+                    <a asp-action="Index" class="btn btn-secondary">بازگشت</a>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

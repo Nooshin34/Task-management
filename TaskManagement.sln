@@ -1,6 +1,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.0.31903.59
+# Visual Studio Version 18
+VisualStudioVersion = 18.3.11505.172 d18.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskManagement.Domain", "TaskManagement.Domain\TaskManagement.Domain.csproj", "{7F3C8A21-4B6E-4D91-9C2A-1E8F4A7B3D12}"
 EndProject
@@ -37,7 +37,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {E6A41C70-2B58-4F19-9D3A-8C7E1F5B0A22}
 		StartupProject = {9B8F2D16-5A73-4E1C-8D40-2F6B9A1C7E55}
+		SolutionGuid = {E6A41C70-2B58-4F19-9D3A-8C7E1F5B0A22}
 	EndGlobalSection
 EndGlobal

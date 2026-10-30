@@ -8,10 +8,6 @@ html {
   }
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
-
 html {
   position: relative;
   min-height: 100%;
@@ -19,13 +15,51 @@ html {
 
 body {
   margin-bottom: 60px;
+  font-family: Tahoma, sans-serif;
 }
 
-.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
-  color: var(--bs-secondary-color);
-  text-align: end;
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  white-space: nowrap;
+  line-height: 60px;
 }
 
-.form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
-  text-align: start;
+.table > tbody > tr.task-deleted > * {
+  background-color: #fdecec !important;
+  --bs-table-bg: #fdecec;
+  --bs-table-accent-bg: #fdecec;
+  --bs-table-hover-bg: #f8dede;
+  color: #a15c63;
+}
+
+.task-deleted-badge {
+  background-color: #f7d4d6;
+  color: #a15c63;
+}
+
+.navbar .navbar-nav {
+  align-items: center;
+}
+
+.btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  padding: 0;
+}
+
+.navbar .navbar-nav .nav-link,
+.navbar .navbar-nav .btn-link {
+  display: flex;
+  align-items: center;
+  line-height: 1.5;
+  height: 40px;
+  padding-top: 0;
+  padding-bottom: 0;
+  margin: 0;
+  box-shadow: none;
 }

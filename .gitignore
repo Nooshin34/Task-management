@@ -10,6 +10,7 @@
 
 ## Visual Studio
 .vs/
+*.slnx
 *.user
 *.userosscache
 *.suo

@@ -14,15 +14,31 @@ public class UserRepository : IUserRepository
         _context = context;
     }
 
-    public async Task<IReadOnlyList<ApplicationUser>> GetAllAsync()
+    public async Task<IReadOnlyList<User>> GetAllAsync()
     {
         return await _context.Users
-            .OrderBy(u => u.FullName)
+            .OrderBy(u => u.FirstName)
+            .ThenBy(u => u.LastName)
             .ToListAsync();
     }
 
-    public async Task<ApplicationUser?> GetByIdAsync(string id)
+    public async Task<User?> GetByIdAsync(int id)
     {
         return await _context.Users.FindAsync(id);
+    }
+
+    public async Task<User?> GetByEmailAsync(string email)
+    {
+        return await _context.Users.FirstOrDefaultAsync(u => u.Email == email);
+    }
+
+    public async Task AddAsync(User user)
+    {
+        await _context.Users.AddAsync(user);
+    }
+
+    public async Task SaveChangesAsync()
+    {
+        await _context.SaveChangesAsync();
     }
 }

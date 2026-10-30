@@ -22,7 +22,7 @@ public class TaskRepository : ITaskRepository
             .FirstOrDefaultAsync(t => t.Id == id);
     }
 
-    public async Task<IReadOnlyList<TaskItem>> GetCreatedByUserAsync(string userId)
+    public async Task<IReadOnlyList<TaskItem>> GetCreatedByUserAsync(int userId)
     {
         return await _context.Tasks
             .Include(t => t.Creator)

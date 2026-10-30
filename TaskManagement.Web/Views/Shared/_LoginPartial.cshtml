@@ -1,0 +1,22 @@
+<ul class="navbar-nav align-items-center flex-row gap-3">
+    @if (User.Identity?.IsAuthenticated == true)
+    {
+        <li class="nav-item">
+            <span class="nav-link text-white py-0">@User.Identity.Name</span>
+        </li>
+        <li class="nav-item">
+            <form asp-controller="Account" asp-action="Logout" method="post" class="m-0 d-flex align-items-center">
+                <button type="submit" class="nav-link btn btn-link text-white py-0">خروج</button>
+            </form>
+        </li>
+    }
+    else
+    {
+        <li class="nav-item">
+            <a class="nav-link text-white py-0" asp-controller="Account" asp-action="Register">ثبت‌نام</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link text-white py-0" asp-controller="Account" asp-action="Login">ورود</a>
+        </li>
+    }
+</ul>
